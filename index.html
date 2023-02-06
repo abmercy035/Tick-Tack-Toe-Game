@@ -1,255 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TIC TAC TOE</title>
-    <link rel="stylesheet" href="styl.css"> 
-    <style>
-    *{
-outline:none;
-margin: 0;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>TIC TAC TOE</title>
+  <link rel="stylesheet" href="styl.css">
+  <style>
+    * {
+      outline: none;
+      margin: 0;
       padding: 0;
-     box-sizing: border-box;
-  font-style: 15px;
-  }
- body{
-text-align: center;
-background: url("MegaBrain.jpg")
-}
-h1{
-    color: #d11508;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      width: 100vw;
+      text-align: center;
+      background-color: rgb(22, 21, 21);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    h1 {
+      color: #d11508;
       margin: 10px;
-font-variant-caps: 
-small-caps;text-align: center;
-margin-top: 50px;
-}
-.wrap{
-width: 470px;
-height:520px;
-text-align: center;
-margin: 100px auto 50px;
-}
-#wrapper{
-    /*cursor: pointer;*/
-    margin: 13px auto;
-    border-radius: 10px;
-    color: #d10229;
-    box-shadow: 3px 6px 18px rgb(228, 228, 228, 0.6);
-    outline:none;
-}
-
-.box{
-display: inline-block;
-width:150px;
-height:150px;
-background: rgba(2, 2, 2, 0.6);
-font-size: 90px;
-text-align: center;
-border: 1px #fff solid ;
-border-radius: 10px ;
-background-position: center;
-background-size: 400px;
-}
-#btn{
-  color:red;
-  width:200px;
-  height:50px;
-  border:none;
-}
-#btn:hover{
-  background: Black;
-  color:white;
-  outline:none;
-}
-  @media only screen and (max-width: 600px) {
-    .wrap{
-width: 320px;
-height:420px;
-text-align: center;
-margin: 70px auto 0px;
-}
-#wrapper{
-    /*cursor: pointer;*/
-    margin: 5px auto;
-    border-radius: 10px;
-    color: #d10229;
-    box-shadow: 3px 6px 18px rgb(228, 228, 228, 0.6);
-    outline:none;
-}
-
-.box{
-display: inline-block;
-width:100px;
-height:100px;
-background: rgba(2, 2, 2, 0.6);
-text-align: center;
-border: 1px #fff solid ;
-border-radius: 10px ;
-background-position: center;
-background-size: 300px;
-}
-#btn{
-  color:red;
-  width:200px;
-  height:50px;
-  border:none;
-}
-#btn:hover{
-  background: Black;
-  color:white;
-  outline:none;
-}
-}
-    </style>
-</head>
-<body>
-        <h1><center> " TIC TAC TOE "</center></h1>
-        <audio src="AUD1.mp3" id="aud1"></audio>
-        <audio src="AUD2.mp3" id="aud2"></audio>
-        <audio src="AUD3.mp3" id="aud3"></audio>
- <div class="wrap">   
-        <h1 id="game"><center>lets play Now</center></h1>
-<div id="wrapper">
-        <div class="box"  id="box1"></div>
-        <div class="box"  id="box2"></div>
-        <div class="box"  id="box3"></div>
-        <div class="box"  id="box4"></div>
-        <div class="box"  id="box5"></div>
-        <div class="box"  id="box6"></div>
-        <div class="box"  id="box7"></div>
-        <div class="box"  id="box8"></div>
-        <div class="box"  id="box9"></div>
-</div>
-</div>
-<button id="btn">RESTART GAME</button>
-
- <script>
-  var aud = document.querySelector('#aud');
-  var aud1 = document.querySelector('#aud1');
-  var aud2 = document.querySelector('#aud2');
- 
-  var one = document.querySelector('#box1');
-  var two = document.querySelector('#box2');
-  var three = document.querySelector('#box3');
- 
-  var four = document.querySelector('#box4');
-  var five = document.querySelector('#box5');
-  var six = document.querySelector('#box6');
-  var seven = document.querySelector('#box7');
-  var eight = document.querySelector('#box8');
-  var nine = document.querySelector('#box9');
- 
- 
-  var wrap = document.querySelector('#wrapper');
-  var boxes = document.querySelectorAll('.box');
-  var btn = document.querySelector('#btn');
-   var img = 'Tick.png';
-  var img2 = 'Cross.png';
-  // wrap.addEventListener('click', tick);
-  btn.onclick = () => {
- 
-   var X_and_O = 0;
-   var boxArray = Array.from(boxes);
-   //   console.log(boxArray);
-   boxArray.forEach(function(box) {
-    if (box.style.backgroundImage !== `` || box.style.backgroundImage !== ``) {
-     box.style.backgroundImage = ``;
+      width: 100%;
+      font-variant-caps:
+        small-caps;
+      text-align: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
- 
-   })
-   game.innerHTML='lets play again'
-  }
- 
-  function pop(a, b, c) {
-   celb();
-   aud2.play();
-  }
-  var X_and_O = 0;
- 
-  for (var i = 0; i < boxes.length; ++i) {
-   var box = boxes[i];
-   box.onclick = function() {
- 
-    if (this.style.backgroundImage === '') {
- 
-     if (X_and_O % 2 == 0) {
-      this.style.backgroundImage = `url(${img})`;
-      X_and_O += 1;
-      aud1.play();
- game.innerHTML='player 2 Turn';
-      checkWin();
-     } else {
-      this.style.backgroundImage = `url(${img2})`;
-      X_and_O += 1;
-      game.innerHTML='player 1 Turn';
- 
-         aud1.play();
-      checkWin();
-     }
+
+    #game-msg {
+      color: #d11508;
+      margin: 10px;
+      font-variant-caps:
+        small-caps;
+      text-align: center;
+      font-size: 30px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-   }
-  }
- 
-  function checkWin() {
- 
-   if (one.style.backgroundImage !== '' && two.style.backgroundImage == one.style.backgroundImage && three.style.backgroundImage == one.style.backgroundImage) {
-    pop(one, two, three);
-   }
-   else if (one.style.backgroundImage !== '' && four.style.backgroundImage == one.style.backgroundImage && seven.style.backgroundImage == one.style.backgroundImage) {
-    pop(one, four, seven);
-   }
-   else if (one.style.backgroundImage !== '' && five.style.backgroundImage == one.style.backgroundImage && nine.style.backgroundImage == one.style.backgroundImage) {
-    pop(one, five, nine);
- 
-   }
-   else if (two.style.backgroundImage !== '' && five.style.backgroundImage == two.style.backgroundImage && eight.style.backgroundImage == two.style.backgroundImage) {
-    pop(two, five, eight);
-   }
-   else if (three.style.backgroundImage !== '' && six.style.backgroundImage == three.style.backgroundImage && nine.style.backgroundImage == three.style.backgroundImage) {
-    pop(three, six, nine);
-   }
-   else if (three.style.backgroundImage !== '' && five.style.backgroundImage == three.style.backgroundImage && seven.style.backgroundImage == three.style.backgroundImage) {
-    pop(three, five, seven);
- 
-   }
-   else if (four.style.backgroundImage !== '' && five.style.backgroundImage == four.style.backgroundImage && six.style.backgroundImage == four.style.backgroundImage) {
-    pop(four, five, six);
-   }
-   else if (seven.style.backgroundImage !== '' && eight.style.backgroundImage == seven.style.backgroundImage && nine.style.backgroundImage == seven.style.backgroundImage) {
-    pop(seven, eight, nine);
-   }
-   else if (one.style.backgroundImage !== '' && two.style.backgroundImage !== '' && three.style.backgroundImage !== '' && four.style.backgroundImage !== '' && five.style.backgroundImage !== '' && six.style.backgroundImage !== '' && seven.style.backgroundImage !== '' && eight.style.backgroundImage !== '' && nine.style.backgroundImage !== '') {
-     game.innerHTML='TIE Match';
-     for (var i = 0; i < boxes.length; ++i) {
-   var box = boxes[i];
-   box.style.backgroundImage = '';
-     }
-   }
-  }
- 
-  function celb() {
-   //  selecting Player turn screen ;
- 
-   let win = document.querySelector('#res');
-   if (X_and_O%2==0) {
-  
-    game.innerHTML = `player 2 is the winner!!!`;
-      for (var i = 0; i < boxes.length; ++i) {
-   var box = boxes[i];
-   box.style.backgroundImage = '';
+
+    .wrap {
+      height: 80%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+
+    #wrapper {
+      min-height: 200px;
+      min-width: 200px;
+      width: 50vw;
+      height: 50vw;
+      max-height: 50vh;
+      max-width: 50vh;
+      cursor: pointer;
+      border-radius: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      color: #d10229;
+      outline: none;
+      background-color: rgb(22, 21, 21);
+      gap: 5px;
+    }
+
+    .gameend::after {
+      content: "";
+      min-width: 350px;
+      min-height: 350px;
+      cursor: not-allowed;
+      position: absolute;
+    }
+
+    .box {
+      border: rgb(255, 255, 255) solid 2px;
+      border-radius: 10px;
+      background-position: center;
+      background-size: 200px;
+    }
+
+    #btn {
+      color: rgb(255, 0, 0);
+      font-weight: 900;
+      font-size: large;
+      max-width: 50vh;
+      width: 50vw;
+      min-height: 50px;
+      border: none;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
+    #btn:hover {
+      background: Black;
+      color: white;
+      outline: none;
+      border: 1px solid rgb(255, 0, 0);
+    }
+
+    @media only screen and (max-width: 600px) {
+      #game-msg {
+        font-size: 25px;
       }
-  //  turn.style.display = 'none';
-   } else{
-    game.innerHTML = `player 2 is the winner!!!`;
-    for (var i = 0; i < boxes.length; ++i) {
-   var box = boxes[i];
-   box.style.backgroundImage = '';
+
+      #btn {
+        font-size: small;
+        min-width: 15vh;
+        max-width: 30vh;
+        min-height: 40px;
+      }
     }
-  // turn.style.display = 'none';
-   }
-  }
- </script>
+  </style>
+</head>
+
+<body>
+  <h1>
+    <center> TIC TAC TOE</center>
+  </h1>
+  <audio src="AUD1.mp3" id="aud1"></audio>
+  <audio src="AUD2.mp3" id="aud2"></audio>
+  <audio src="AUD3.mp3" id="aud3"></audio>
+  <div class="wrap">
+    <span id="game-msg">
+      <center>lets play now</center>
+    </span>
+    <div id="wrapper">
+      <div class="box" id="box1"></div>
+      <div class="box" id="box2"></div>
+      <div class="box" id="box3"></div>
+      <div class="box" id="box4"></div>
+      <div class="box" id="box5"></div>
+      <div class="box" id="box6"></div>
+      <div class="box" id="box7"></div>
+      <div class="box" id="box8"></div>
+      <div class="box" id="box9"></div>
+    </div>
+    <!--
+   -->
+  </div>
+  <button id="btn">RESTART GAME</button>
+
+  <script>
+    var aud = document.querySelector( '#aud' );
+    var aud1 = document.querySelector( '#aud1' );
+    var aud2 = document.querySelector( '#aud2' );
+    var one = document.querySelector( '#box1' );
+    var two = document.querySelector( '#box2' );
+    var three = document.querySelector( '#box3' );
+    var four = document.querySelector( '#box4' );
+    var five = document.querySelector( '#box5' );
+    var six = document.querySelector( '#box6' );
+    var seven = document.querySelector( '#box7' );
+    var eight = document.querySelector( '#box8' );
+    var nine = document.querySelector( '#box9' );
+    var wrap = document.querySelector( '#wrapper' );
+    var boxes = document.querySelectorAll( '.box' );
+    var btn = document.querySelector( '#btn' );
+    var msg = document.querySelector( '#game-msg' );
+    var img = 'Tick.png';
+    var img2 = 'Cross.png';
+    btn.onclick = () =>
+    {
+      var X_and_O = 0;
+      var boxArray = Array.from( boxes );
+      boxArray.forEach( function ( box )
+      {
+        box.style.border = "white 1px solid"
+        if ( box.style.backgroundImage !== `` || box.style.backgroundColor !== `` )
+        {
+          box.style.backgroundImage = ``;
+          box.style.backgroundColor = ""
+          wrap.classList.remove( "gameend" )
+        }
+      } )
+      game.innerHTML = 'lets play again'
+    }
+
+
+
+    function pop ( a, b, c )
+    {
+      // celb();
+      aud2.play();
+      let win = document.querySelector( '#res' );
+      if ( X_and_O % 2 == 0 )
+      {
+        msg.innerHTML = `player 2 is the winner!!!`;
+      } else
+      {
+        msg.innerHTML = `player 1 is the winner!!!`;
+      }
+      for ( var i = 0; i < boxes.length; ++i )
+      {
+        var box = boxes[ i ];
+        box.style.border = "white 1px solid"
+        a.style.backgroundColor = "red"
+        b.style.backgroundColor = "red"
+        c.style.backgroundColor = "red"
+        wrap.classList.add( "gameend" )
+      }
+    }
+    var X_and_O = 0;
+    for ( var i = 0; i < boxes.length; ++i )
+    {
+      var box = boxes[ i ];
+      box.onclick = function ()
+      {
+        if ( this.style.backgroundImage === '' )
+        {
+          if ( X_and_O % 2 == 0 )
+          {
+            this.style.backgroundImage = `url(${ img })`;
+            msg.innerHTML = 'player 2 turn';
+          } else
+          {
+            this.style.backgroundImage = `url(${ img2 })`;
+            msg.innerHTML = 'player 1 turn';
+          }
+          X_and_O += 1;
+          this.style.border = "red 1px solid"
+          checkWin();
+        }
+      }
+    }
+
+    function checkWin ()
+    {
+
+      if ( one.style.backgroundImage !== '' && two.style.backgroundImage == one.style.backgroundImage && three.style.backgroundImage == one.style.backgroundImage )
+      {
+        pop( one, two, three );
+      }
+      else if ( one.style.backgroundImage !== '' && four.style.backgroundImage == one.style.backgroundImage && seven.style.backgroundImage == one.style.backgroundImage )
+      {
+        pop( one, four, seven );
+      }
+      else if ( one.style.backgroundImage !== '' && five.style.backgroundImage == one.style.backgroundImage && nine.style.backgroundImage == one.style.backgroundImage )
+      {
+        pop( one, five, nine );
+      }
+      else if ( two.style.backgroundImage !== '' && five.style.backgroundImage == two.style.backgroundImage && eight.style.backgroundImage == two.style.backgroundImage )
+      {
+        pop( two, five, eight );
+      }
+      else if ( three.style.backgroundImage !== '' && six.style.backgroundImage == three.style.backgroundImage && nine.style.backgroundImage == three.style.backgroundImage )
+      {
+        pop( three, six, nine );
+      }
+      else if ( three.style.backgroundImage !== '' && five.style.backgroundImage == three.style.backgroundImage && seven.style.backgroundImage == three.style.backgroundImage )
+      {
+        pop( three, five, seven );
+
+      }
+      else if ( four.style.backgroundImage !== '' && five.style.backgroundImage == four.style.backgroundImage && six.style.backgroundImage == four.style.backgroundImage )
+      {
+        pop( four, five, six );
+      }
+      else if ( seven.style.backgroundImage !== '' && eight.style.backgroundImage == seven.style.backgroundImage && nine.style.backgroundImage == seven.style.backgroundImage )
+      {
+        pop( seven, eight, nine );
+      }
+      else if ( one.style.backgroundImage !== '' && two.style.backgroundImage !== '' && three.style.backgroundImage !== '' && four.style.backgroundImage !== '' && five.style.backgroundImage !== '' && six.style.backgroundImage !== '' && seven.style.backgroundImage !== '' && eight.style.backgroundImage !== '' && nine.style.backgroundImage !== '' )
+      {
+        msg.innerHTML = 'TIE Match';
+        for ( var i = 0; i < boxes.length; ++i )
+        {
+          var box = boxes[ i ];
+          box.style.backgroundImage = '';
+        }
+      }
+    }
+  </script>
 </body>
+
 </html>
