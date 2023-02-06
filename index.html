@@ -127,9 +127,6 @@
   <h1>
     <center> TIC TAC TOE</center>
   </h1>
-  <audio src="AUD1.mp3" id="aud1"></audio>
-  <audio src="AUD2.mp3" id="aud2"></audio>
-  <audio src="AUD3.mp3" id="aud3"></audio>
   <div class="wrap">
     <span id="game-msg">
       <center>lets play now</center>
@@ -151,9 +148,6 @@
   <button id="btn">RESTART GAME</button>
 
   <script>
-    var aud = document.querySelector( '#aud' );
-    var aud1 = document.querySelector( '#aud1' );
-    var aud2 = document.querySelector( '#aud2' );
     var one = document.querySelector( '#box1' );
     var two = document.querySelector( '#box2' );
     var three = document.querySelector( '#box3' );
@@ -165,11 +159,13 @@
     var nine = document.querySelector( '#box9' );
     var wrap = document.querySelector( '#wrapper' );
     var boxes = document.querySelectorAll( '.box' );
-    var btn = document.querySelector( '#btn' );
+    var reset_btn = document.querySelector( '#btn' );
     var msg = document.querySelector( '#game-msg' );
     var img = 'Tick.png';
     var img2 = 'Cross.png';
-    btn.onclick = () =>
+
+    // reset game or end game 
+    reset_btn.onclick = () =>
     {
       var X_and_O = 0;
       var boxArray = Array.from( boxes );
@@ -183,15 +179,13 @@
           wrap.classList.remove( "gameend" )
         }
       } )
-      game.innerHTML = 'lets play again'
+      msg.innerHTML = 'lets play again'
     }
 
 
 
-    function pop ( a, b, c )
+    function endGame ( a, b, c )
     {
-      // celb();
-      aud2.play();
       let win = document.querySelector( '#res' );
       if ( X_and_O % 2 == 0 )
       {
@@ -210,75 +204,71 @@
         wrap.classList.add( "gameend" )
       }
     }
+    // initializing player indicator value;
     var X_and_O = 0;
+    // Adding click to all game box
     for ( var i = 0; i < boxes.length; ++i )
     {
       var box = boxes[ i ];
       box.onclick = function ()
       {
+        // when box is clicked check if box has not been clicked
         if ( this.style.backgroundImage === '' )
         {
+          //check which user clicked the box;
           if ( X_and_O % 2 == 0 )
           {
+            //set corresponding background associated with the user who click.
             this.style.backgroundImage = `url(${ img })`;
+            //ask next play to play 
             msg.innerHTML = 'player 2 turn';
           } else
           {
+            //set corresponding background associated with the user who click.
             this.style.backgroundImage = `url(${ img2 })`;
+            //ask next play to play 
             msg.innerHTML = 'player 1 turn';
           }
+          // increment player click to keep track of user that played
           X_and_O += 1;
           this.style.border = "red 1px solid"
+          //call win checker to see if a win way is met.
           checkWin();
         }
       }
     }
 
-    function checkWin ()
+
+    const checking = ( first_box, second_box, third_box ) =>
     {
+      // checking if one possible ways oof winning has been met
+      // then call endGame() and passing the met wining way.
+      if ( first_box.style.backgroundImage !== '' && second_box.style.backgroundImage == first_box.style.backgroundImage && third_box.style.backgroundImage == first_box.style.backgroundImage )
+        endGame( first_box, second_box, third_box );
 
-      if ( one.style.backgroundImage !== '' && two.style.backgroundImage == one.style.backgroundImage && three.style.backgroundImage == one.style.backgroundImage )
-      {
-        pop( one, two, three );
-      }
-      else if ( one.style.backgroundImage !== '' && four.style.backgroundImage == one.style.backgroundImage && seven.style.backgroundImage == one.style.backgroundImage )
-      {
-        pop( one, four, seven );
-      }
-      else if ( one.style.backgroundImage !== '' && five.style.backgroundImage == one.style.backgroundImage && nine.style.backgroundImage == one.style.backgroundImage )
-      {
-        pop( one, five, nine );
-      }
-      else if ( two.style.backgroundImage !== '' && five.style.backgroundImage == two.style.backgroundImage && eight.style.backgroundImage == two.style.backgroundImage )
-      {
-        pop( two, five, eight );
-      }
-      else if ( three.style.backgroundImage !== '' && six.style.backgroundImage == three.style.backgroundImage && nine.style.backgroundImage == three.style.backgroundImage )
-      {
-        pop( three, six, nine );
-      }
-      else if ( three.style.backgroundImage !== '' && five.style.backgroundImage == three.style.backgroundImage && seven.style.backgroundImage == three.style.backgroundImage )
-      {
-        pop( three, five, seven );
-
-      }
-      else if ( four.style.backgroundImage !== '' && five.style.backgroundImage == four.style.backgroundImage && six.style.backgroundImage == four.style.backgroundImage )
-      {
-        pop( four, five, six );
-      }
-      else if ( seven.style.backgroundImage !== '' && eight.style.backgroundImage == seven.style.backgroundImage && nine.style.backgroundImage == seven.style.backgroundImage )
-      {
-        pop( seven, eight, nine );
-      }
+      // else if all boxes been clicked and no wining is met then display Tie Match 
       else if ( one.style.backgroundImage !== '' && two.style.backgroundImage !== '' && three.style.backgroundImage !== '' && four.style.backgroundImage !== '' && five.style.backgroundImage !== '' && six.style.backgroundImage !== '' && seven.style.backgroundImage !== '' && eight.style.backgroundImage !== '' && nine.style.backgroundImage !== '' )
       {
         msg.innerHTML = 'TIE Match';
+        // reset game by reseting all box background. 
         for ( var i = 0; i < boxes.length; ++i )
         {
           var box = boxes[ i ];
           box.style.backgroundImage = '';
         }
       }
+    }
+    // checking if user won by passing all possible wining ways to the CHECKING() function.
+    function checkWin ()
+    {
+      checking( one, four, seven )
+      checking( one, five, nine );
+      checking( two, one, three )
+      checking( two, five, eight );
+      checking( three, six, nine );
+      checking( three, five, seven );
+      checking( four, five, six );
+      checking( seven, eight, nine );
     }
   </script>
 </body>
